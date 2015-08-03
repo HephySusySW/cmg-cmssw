@@ -12,10 +12,6 @@ parser.add_option("--outputFile", dest="outputFile", default="MetType1_dump.py",
 parser.add_option("--GT", dest="GT", default='MCRUN2_74_V9A::All', type="string", action="store", help="Global Tag")
 parser.add_option("--jecDBFile", dest="jecDBFile", default="", type="string", action="store", help="jec DB File")
 parser.add_option("--jecEra", dest="jecEra", default='', type="string", action="store", help="jecEra")
-<<<<<<< HEAD:CMGTools/ObjectStudies/cfg/corMETMiniAOD_cfgCreator.py
-parser.add_option("--maxEvents", dest="maxEvents", default=-1, type="int", action="store", help="maxEvents")
-=======
->>>>>>> cmg-central/CMGTools-from-CMSSW_7_4_7:CMGTools/ObjectStudies/cfg/corMETMiniAOD_cfgCreator.py
 (options, args) = parser.parse_args()
 
 #print options.outputFile, options.GT

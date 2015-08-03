@@ -44,19 +44,22 @@ ttHLepSkim.maxLeptons = 999
 # --- JET-LEPTON CLEANING ---
 jetAna.minLepPt = 10
 
-jetAna.mcGT = "PHYS14_V4_MC"
+#jetAna.mcGT = "PHYS14_V4_MC"
+jetAna.mcGT = "Summer15_V5_p6_MC"
 jetAna.doQG = True
 jetAna.smearJets = False #should be false in susycore, already
 jetAna.recalibrateJets = True #should be true in susycore, already
-metAna.recalibrate = False #should be false in susycore, already
-metAna.otherMETs = [\
-  ("metTxy",('slimmedTxyMETs', 'std::vector<pat::MET>')),
-  ("metRaw",('slimmedRAWMETs', 'std::vector<pat::MET>')),
-  ]
+#jetAna.recalibrateJets =  False #For data
+#metAna.recalibrate = False #should be false in susycore, already
+metAna.recalibrate = True #should be false in susycore, already
+#metAna.otherMETs = [\
+#  ("metTxy",('slimmedTxyMETs', 'std::vector<pat::MET>')),
+#  ("metRaw",('slimmedRAWMETs', 'std::vector<pat::MET>')),
+#  ]
 
 isoTrackAna.setOff=False
 genAna.allGenTaus = True
-
+#eventFlagsAna.processName = 'HLT'
 
 from CMGTools.TTHAnalysis.analyzers.ttHLepEventAnalyzer import ttHLepEventAnalyzer
 ttHEventAna = cfg.Analyzer(
@@ -77,18 +80,52 @@ ttHSTSkimmer = cfg.Analyzer(
     minST = 200,
     )
 
-from CMGTools.TTHAnalysis.analyzers.ttHReclusterJetsAnalyzer import ttHReclusterJetsAnalyzer
-ttHReclusterJets = cfg.Analyzer(
-    ttHReclusterJetsAnalyzer, name="ttHReclusterJetsAnalyzer",
-    pTSubJet = 30,
-    etaSubJet = 5.0,
-            )
+#from CMGTools.TTHAnalysis.analyzers.ttHReclusterJetsAnalyzer import ttHReclusterJetsAnalyzer
+#ttHReclusterJets = cfg.Analyzer(
+#    ttHReclusterJetsAnalyzer, name="ttHReclusterJetsAnalyzer",
+#    pTSubJet = 30,
+#    etaSubJet = 5.0,
+#            )
 
 #from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14  import *
-
+from CMGTools.RootTools.samples.triggers_13TeV_Spring15 import *
+from CMGTools.RootTools.samples.triggers_13TeV_Spring15_1l import *
 triggerFlagsAna.triggerBits = {
-#put trigger here for data
-}
+        # put trigger here for _MC_
+        ## hadronic
+        'HT350' : triggers_HT350,
+        'HT600' : triggers_HT600,
+        'HT900' : triggers_HT900,
+        'MET170' : triggers_MET170,
+        'HTMET' : triggers_HTMET,
+        'Had' : triggers_had,
+        ## muon
+        'SingleMu' : triggers_1mu,
+        'Mu45NoIso' : trigger_1mu_noiso_r,
+        'Mu50NoIso' : trigger_1mu_noiso_w,
+        'MuHT600' : triggers_mu_ht600,
+        'MuHT400MET70' : triggers_mu_ht400_met70,
+        'MuHT350MET70' : triggers_mu_ht350_met70,
+        'MuMET120' : triggers_mu_met120,
+        'MuHT400B': triggers_mu_ht400_btag,
+        'MuHad' : triggers_muhad,
+        ## electrons
+        'SingleEl' : triggers_1el,
+        'ElNoIso' : trigger_1el_noiso,
+        'EleHT600' : triggers_el_ht600,
+        'EleHT400MET70' : triggers_el_ht400_met70,
+        'EleHT350MET70' : triggers_el_ht350_met70,
+        'EleHT200' :triggers_el_ht200,
+        'ElHT400B': triggers_el_ht400_btag,
+        'ElHad' : triggers_elhad,
+        #put trigger here for data
+        'mumuRun1' : triggers_mumu_run1,
+        'mumuIso' : triggers_mumu_iso,
+        'mumuNoniso_50ns' : triggers_mumu_noniso_50ns,
+        'mumuNoiso' : triggers_mumu_noniso,
+        'mumuSS' : triggers_mumu_ss,
+        'mumuHT' : triggers_mumu_ht,
+        }
 
 # Tree Producer
 from CMGTools.TTHAnalysis.analyzers.treeProducerSusySingleLepton import *
@@ -130,7 +167,7 @@ treeProducer = cfg.Analyzer(
 sequence = cfg.Sequence(susyCoreSequence+[
         ttHEventAna,
 #    ttHSTSkimmer,
-        ttHReclusterJets,
+#    ttHReclusterJets,
         treeProducer,
         ])
 

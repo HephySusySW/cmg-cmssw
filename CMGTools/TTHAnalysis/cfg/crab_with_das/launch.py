@@ -10,7 +10,7 @@ parser = OptionParser(usage="python launchall.py [options] component1 [ componen
                           description="Launch heppy jobs with CRAB3. Components correspond to the variables defined in heppy_samples.py (their name attributes)")
 parser.add_option("--production_label", dest="production_label", help="production label", default="heppy")
 parser.add_option("--cmg_version", dest="cmg_version", help="CMG version", \
-                      default="CMGTools-from-CMSSW_7_2_3_LocalDevelopments")
+                      default="CMGTools-from-CMSSW_7_4_7_LocalDevelopments")
 parser.add_option("--unitsPerJob", dest="unitsPerJob", help="Nr. of units (files) / crab job", type="int", default=10)
 parser.add_option("--totalUnits", dest="totalUnits", help="Total nr. of units (files)", type="int", default=None)
 parser.add_option("--inputDBS", dest="inputDBS", help="dbs instance", default=None)
