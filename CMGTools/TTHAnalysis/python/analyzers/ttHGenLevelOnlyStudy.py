@@ -76,6 +76,7 @@ class ttHGenLevelOnlyStudy( Analyzer ):
 
     def doJets(self,iEvent,event):
         event.cleanJetsAll = []
+        event.jetExtra = []
         event.cleanJetsFwd = []
         event.cleanJets = []
         for j in self.mchandles['jets'].product(): 
