@@ -37,7 +37,7 @@ elif isolation == "relIso03":
 
 
 # --- LEPTON SKIMMING ---
-ttHLepSkim.minLeptons = 0
+ttHLepSkim.minLeptons = 1
 ttHLepSkim.maxLeptons = 999
 #LepSkim.idCut  = ""
 #LepSkim.ptCuts = []
@@ -126,22 +126,21 @@ treeProducer = cfg.Analyzer(
 
 #-------- SAMPLES AND TRIGGERS -----------
 
-<<<<<<< HEAD
 from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 #selectedComponents =  [TTJets]
 #TTJets.splitFactor=1000 
 from CMGTools.TTHAnalysis.samples.samples_13TeV_private_heplx import *
 selectedComponents = [T2DegStop_300_270]
-=======
-#from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
-#selectedComponents = [QCD_HT_100To250, QCD_HT_250To500, QCD_HT_500To1000, QCD_HT_1000ToInf,TTJets, TTWJets, TTZJets, TTH, SMS_T1tttt_2J_mGl1500_mLSP100, SMS_T1tttt_2J_mGl1200_mLSP800] + SingleTop + WJetsToLNuHT + DYJetsM50HT + T5ttttDeg + T1ttbbWW + T5qqqqWW
-#selectedComponents = [TTJets]
->>>>>>> f9d59eb9a682a51e9a6001234c6583e501ff85e7
 
 
 from CMGTools.TTHAnalysis.samples.samples_13TeV_private_heplx import *
-selectedComponents = [DYJetsToLL_M50_PU20bx25]#, DYJetsToLLHT100to200_M50_PU20bx25, DYJetsToLLHT200to400_M50_PU20bx25, DYJetsToLLHT400to600_M50_PU20bx25, DYJetsToLLHT600toInf_M50_PU20bx25]
-
+#selectedComponents = [DYJetsToLL_M50_PU20bx25]#, DYJetsToLLHT100to200_M50_PU20bx25, DYJetsToLLHT200to400_M50_PU20bx25, DYJetsToLLHT400to600_M50_PU20bx25, DYJetsToLLHT600toInf_M50_PU20bx25]
+selectedComponents = [
+SMS_T2tt_2J_mStop850_mLSP100,
+SMS_T2tt_2J_mStop650_mLSP325,
+SMS_T2tt_2J_mStop500_mLSP325,
+SMS_T2tt_2J_mStop425_mLSP325,
+]
 #-------- SEQUENCE
 
 sequence = cfg.Sequence(susyCoreSequence+[
@@ -156,13 +155,7 @@ sequence = cfg.Sequence(susyCoreSequence+[
 test = 2
 if test==1:
     # test a single component, using a single thread.
-<<<<<<< HEAD
-    #comp = TTJets
     comp = T2DegStop_300_270
-=======
-    comp = selectedComponents[0]
->>>>>>> f9d59eb9a682a51e9a6001234c6583e501ff85e7
-#    comp = SMS_T1tttt_2J_mGl1500_mLSP100
     comp.files = comp.files[:10]
     print "Files:",comp.files
     selectedComponents = [comp]
@@ -170,8 +163,8 @@ if test==1:
 elif test==2:
     # test all components (1 thread per component).
     for comp in selectedComponents:
-        comp.splitFactor = 1
-        comp.files = comp.files[:1]
+#        comp.files = comp.files[:1]
+        comp.splitFactor = len(comp.files)
 
 from PhysicsTools.HeppyCore.framework.eventsfwlite import Events
 config = cfg.Config( components = selectedComponents,
