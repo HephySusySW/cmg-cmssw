@@ -193,7 +193,7 @@ isData = True # default, but will be overwritten below
 #sample = 'MC'
 #sample = 'data'
 sample = 'Signal'
-test = 1
+test = 0
 
 if sample == "MC":
 
@@ -277,7 +277,8 @@ elif sample == "Signal":
 
 	if test==1:
 		# test a single component, using a single thread.
-		comp = T1tttt_mGo_1475to1500_mLSP_1to1250
+		#comp =  T5qqqqVV_mGluino_1000To1075_mLSP_1To950
+		comp =  T5qqqqVV_mGluino_1200To1275_mLSP_1to1150
 		comp.files = comp.files[:1]
 		selectedComponents = [comp]
 		comp.splitFactor = 1
@@ -296,7 +297,7 @@ elif sample == "Signal":
 		# PRODUCTION
 		# run on everything
 
-		#selectedComponents = [ T1tttt_mGo_1200_mLSP_1to825, T1tttt_mGo_1900to1950_mLSP_0to1450 ]
+		selectedComponents = [ T5qqqqVV_mGluino_1200To1275_mLSP_1to1150 , T5qqqqVV_mGluino_1000To1075_mLSP_1To950 ]
 
 		for comp in selectedComponents:
 			comp.fineSplitFactor = 1
@@ -395,7 +396,7 @@ sequence = cfg.Sequence(susyCoreSequence+[
 		LHEAna,
 		ttHEventAna,
 		#ttHSTSkimmer,
-		ttHHTSkimmer,
+		#ttHHTSkimmer,
 		hbheFilterAna,
 		treeProducer,
 		])
