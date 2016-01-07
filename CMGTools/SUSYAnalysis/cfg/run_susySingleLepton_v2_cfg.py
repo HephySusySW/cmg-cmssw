@@ -395,7 +395,7 @@ hbheFilterAna = cfg.Analyzer(
 sequence = cfg.Sequence(susyCoreSequence+[
 		LHEAna,
 		ttHEventAna,
-		#ttHSTSkimmer,
+		ttHSTSkimmer,
 		#ttHHTSkimmer,
 		hbheFilterAna,
 		treeProducer,
