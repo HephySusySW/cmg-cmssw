@@ -75,9 +75,10 @@ elif isolation == "hybridIso":
   lepAna.ele_isoCorr = "rhoArea"
   lepAna.mu_isoCorr = "rhoArea"
   
-  lepAna.loose_muon_isoCut     =  lambda mu: ( (mu.pt() < 25  and mu.absIso04 < 5 ) or (mu.pt()>=25 and mu.relIso04 < 0.2 ) )
+  #lepAna.loose_muon_isoCut     =  lambda mu: ( (mu.pt() < 25  and mu.absIso04 < 15 ) or (mu.pt()>=25 and mu.relIso04 < 0.6 ) )
+  lepAna.loose_muon_isoCut     =  lambda mu: ( (mu.pt() < 25  and mu.absIso03 < 15 ) or (mu.pt()>=25 and mu.relIso03 < 0.6 ) )
   #lepAna.loose_electron_isoCut =  None # 
-  lepAna.loose_electron_relIso = lambda el: ( el.relIso04 < 0.5   )
+  lepAna.loose_electron_relIso = lambda el: (  (el.pt() < 25  and el.absIso03 < 15 ) or (el.pt()>=25 and el.relIso03 < 0.6 )  )
 
 
 # --- LEPTON SKIMMING ---

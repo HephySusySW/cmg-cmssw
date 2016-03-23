@@ -64,7 +64,7 @@ SignalSUSYFullScan = [ SMS_T1bbbb_mGluino1000_1025_mLSP1to975_1000, SMS_T1bbbb_m
 
 SMS_T2_4bd_mStop_100_mLSP_20to90        = kreator.makeMCComponent("SMS_T2_4bd_mStop_100_mLSP_20to90","/SMS-T2-4bd_mStop-100_mLSP-20to90_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root",  1521.11        )
 SMS_T2_4bd_mStop_125_mLSP_45to115       = kreator.makeMCComponent("SMS_T2_4bd_mStop_125_mLSP_45to115","/SMS-T2-4bd_mStop-125_mLSP-45to115_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root",  574.981      )
-SMS_T2_4bd_mStop_150_mLSP_45to115       = kreator.makeMCComponent("SMS_T2_4bd_mStop_150_mLSP_45to115","/SMS-T2-4bd_mStop-150_mLSP-70to140_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root",  249.409      )
+SMS_T2_4bd_mStop_150_mLSP_70to140       = kreator.makeMCComponent("SMS_T2_4bd_mStop_150_mLSP_45to115","/SMS-T2-4bd_mStop-150_mLSP-70to140_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root",  249.409      )
 SMS_T2_4bd_mStop_175_mLSP_95to165       = kreator.makeMCComponent("SMS_T2_4bd_mStop_175_mLSP_95to165","/SMS-T2-4bd_mStop-175_mLSP-95to165_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root",  121.416      )
 SMS_T2_4bd_mStop_200_mLSP_120to190      = kreator.makeMCComponent("SMS_T2_4bd_mStop_200_mLSP_120to190","/SMS-T2-4bd_mStop-200_mLSP-120to190_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root", 64.5085     )
 SMS_T2_4bd_mStop_225_mLSP_145to225      = kreator.makeMCComponent("SMS_T2_4bd_mStop_225_mLSP_145to225","/SMS-T2-4bd_mStop-225_mLSP-145to225_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root", 36.3818     )
@@ -76,7 +76,7 @@ SMS_T2_4bd_mStop_350_mLSP_270to340      = kreator.makeMCComponent("SMS_T2_4bd_mS
 SMS_T2_4bd_mStop_375_mLSP_295to365      = kreator.makeMCComponent("SMS_T2_4bd_mStop_375_mLSP_295to365","/SMS-T2-4bd_mStop-375_mLSP-295to365_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root", 2.61162     )
 SMS_T2_4bd_mStop_400_mLSP_320to390      = kreator.makeMCComponent("SMS_T2_4bd_mStop_400_mLSP_320to390","/SMS-T2-4bd_mStop-400_mLSP-320to390_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root", 1.83537     )
 SMS_T2_4bd_mStop_425to475_mLSP_345to465 = kreator.makeMCComponent("SMS_T2_4bd_mStop_425to475_mLSP_345to465","/SMS-T2-4bd_mStop-425to475_mLSP-345to465_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root"     )
-SMS_T2_4bd_mStop_500to550_mLSP_470to590 = kreator.makeMCComponent("SMS_T2_4bd_mStop_500to550_mLSP_470to590","/SMS-T2-4bd_mStop-500to550_mLSP-420to540_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root"     )  # mixed stops, no xsec
+SMS_T2_4bd_mStop_500to550_mLSP_420to540 = kreator.makeMCComponent("SMS_T2_4bd_mStop_500to550_mLSP_420to540","/SMS-T2-4bd_mStop-500to550_mLSP-420to540_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root"     )  # mixed stops, no xsec
 SMS_T2_4bd_mStop_550to600_mLSP_470to590 = kreator.makeMCComponent("SMS_T2_4bd_mStop_550to600_mLSP_470to590","/SMS-T2-4bd_mStop-550to600_mLSP-470to590_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root"     )  # mixed stops, no xsec
 # 550: 0.296128    575: 0.226118       600: 0.174599
 
@@ -107,33 +107,29 @@ SMS_T2mixed_mStop_500to550_mLSP_420to540  =  kreator.makeMCComponent("SMS_T2mixe
 
 
 
-
-
-
-#SMS-T2mixed_mStop-100_mLSP-20to90         = kreator.makeMCComponent("/SMS-T2mixed_mStop-100_mLSP-20to90_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM", "CMS", ".*root",  1521.11     , useAAA=True)
-#SMS-T2mixed_mStop-125_mLSP-45to115        = kreator.makeMCComponent("/SMS-T2mixed_mStop-125_mLSP-45to115_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM", "CMS", ".*root",  574.981    , useAAA=True)
-#SMS-T2mixed_mStop-150_mLSP-70to140        = kreator.makeMCComponent("/SMS-T2mixed_mStop-150_mLSP-70to140_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM", "CMS", ".*root",  249.409    , useAAA=True)
-#SMS-T2mixed_mStop-175_mLSP-95to165        = kreator.makeMCComponent("/SMS-T2mixed_mStop-175_mLSP-95to165_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM", "CMS", ".*root",  121.416    , useAAA=True)
-#SMS-T2mixed_mStop-250_mLSP-170to240       = kreator.makeMCComponent("/SMS-T2mixed_mStop-250_mLSP-170to240_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM", "CMS", ".*root",  21.5949    , useAAA=True)
-#SMS-T2mixed_mStop-275_mLSP-195to265       = kreator.makeMCComponent("/SMS-T2mixed_mStop-275_mLSP-195to265_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v2/MINIAODSIM", "CMS", ".*root",  13.3231    , useAAA=True)
-#SMS-T2mixed_mStop-350_mLSP-270to340       = kreator.makeMCComponent("/SMS-T2mixed_mStop-350_mLSP-270to340_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v2/MINIAODSIM", "CMS", ".*root",  3.78661    , useAAA=True)
-#SMS-T2mixed_mStop-375_mLSP-295to365       = kreator.makeMCComponent("/SMS-T2mixed_mStop-375_mLSP-295to365_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v2/MINIAODSIM", "CMS", ".*root",   2.61162   , useAAA=True)
-#SMS-T2mixed_mStop-425to475_mLSP-345to465  = kreator.makeMCComponent("/SMS-T2mixed_mStop-425to475_mLSP-345to465_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v2/MINIAODSIM", "CMS", ".*root", 0     , useAAA=True)
-#SMS-T2mixed_mStop-500to550_mLSP-420to540  = kreator.makeMCComponent("/SMS-T2mixed_mStop-500to550_mLSP-420to540_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v2/MINIAODSIM", "CMS", ".*root", 0     , useAAA=True)
-#SMS-T2mixed_mStop-500to550_mLSP-420to540  = kreator.makeMCComponent("/SMS-T2mixed_mStop-500to550_mLSP-420to540_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root",  0    , useAAA=True)
-
-#SMS_T2_4bd_mStop-200_mLSP_120to190      = kreator.makeMCComponent("/SMS-T2-4bd_mStop-200_mLSP-120to190_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM ", "CMS", ".*root",                            64.5085       , useAAA=True)
-#SMS_T2_4bd_mStop-275_mLSP_195to265      = kreator.makeMCComponent("/SMS-T2-4bd_mStop-275_mLSP-195to265_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM ", "CMS", ".*root",  13.3231    , useAAA=True)
-#SMS_T2_4bd_mStop-325_mLSP_245to315      = kreator.makeMCComponent("/SMS-T2-4bd_mStop-325_mLSP-245to315_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM ", "CMS", ".*root",  5.60471    , useAAA=True)
-#SMS_T2_4bd_mStop-375_mLSP_295to365      = kreator.makeMCComponent("/SMS-T2-4bd_mStop-375_mLSP-295to365_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM ", "CMS", ".*root", 2.61162     , useAAA=True)
-#SMS_T2_4bd_mStop-400_mLSP_320to390      = kreator.makeMCComponent("/SMS-T2-4bd_mStop-400_mLSP-320to390_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM ", "CMS", ".*root",  1.83537    , useAAA=True)
-
     
 SignalT2Deg4BodyScan= [ 
-    SMS_T2_4bd_mStop_100_mLSP_20to90   ,SMS_T2_4bd_mStop_125_mLSP_45to115  ,SMS_T2_4bd_mStop_200_mLSP_120to190 ,
-    SMS_T2_4bd_mStop_225_mLSP_145to225 ,SMS_T2_4bd_mStop_275_mLSP_195to265 ,SMS_T2_4bd_mStop_300_mLSP_220to290    , 
-    SMS_T2_4bd_mStop_325_mLSP_245to315 ,SMS_T2_4bd_mStop_350_mLSP_270to340 ,SMS_T2_4bd_mStop_375_mLSP_295to365    , 
-    SMS_T2_4bd_mStop_400_mLSP_320to390 ,SMS_T2_4bd_mStop_550to600_mLSP_470to590,
+
+
+
+                      SMS_T2_4bd_mStop_100_mLSP_20to90       ,
+                      SMS_T2_4bd_mStop_125_mLSP_45to115      ,
+                      SMS_T2_4bd_mStop_150_mLSP_70to140      ,
+                      SMS_T2_4bd_mStop_175_mLSP_95to165      ,
+                      SMS_T2_4bd_mStop_200_mLSP_120to190     ,
+                      SMS_T2_4bd_mStop_225_mLSP_145to225     ,
+                      SMS_T2_4bd_mStop_250_mLSP_170to240     ,
+                      SMS_T2_4bd_mStop_275_mLSP_195to265     ,
+                      SMS_T2_4bd_mStop_300_mLSP_220to290     ,
+                      SMS_T2_4bd_mStop_325_mLSP_245to315     ,
+                      SMS_T2_4bd_mStop_350_mLSP_270to340     ,
+                      SMS_T2_4bd_mStop_375_mLSP_295to365     ,
+                      SMS_T2_4bd_mStop_400_mLSP_320to390     ,
+                      SMS_T2_4bd_mStop_425to475_mLSP_345to465,
+                      SMS_T2_4bd_mStop_500to550_mLSP_420to540,
+                      SMS_T2_4bd_mStop_550to600_mLSP_470to590,
+
+
           ]
 
 
@@ -156,7 +152,7 @@ SignalT2DegFullScan = SignalT2Deg4BodyScan + SignalT2DegMixedScan
 ### ----------------------------- summary ----------------------------------------
 
 
-signalSamples = SignalEXO + SignalSUSY + SignalSUSYFullScan #+ SignalSUSYPrivate
+signalSamples = SignalEXO + SignalSUSY + SignalSUSYFullScan + SignalT2Deg4BodyScan #+ SignalSUSYPrivate
 
 samples = signalSamples
 
