@@ -5,6 +5,7 @@
 import PhysicsTools.HeppyCore.framework.config as cfg
 from PhysicsTools.HeppyCore.framework.heppy_loop import getHeppyOption
 
+import os
 #Load all analyzers
 from CMGTools.TTHAnalysis.analyzers.susyCore_modules_cff import *
 
@@ -75,10 +76,11 @@ elif isolation == "hybridIso":
   lepAna.ele_isoCorr = "rhoArea"
   lepAna.mu_isoCorr = "rhoArea"
   
-  #lepAna.loose_muon_isoCut     =  lambda mu: ( (mu.pt() < 25  and mu.absIso04 < 15 ) or (mu.pt()>=25 and mu.relIso04 < 0.6 ) )
+  #lepAna.loose_muon_isoCut     =  lambda mu: ( (mu.pt() < 25  and mu.absIso04 < 5 ) or (mu.pt()>=25 and mu.relIso04 < 0.2 ) )
   lepAna.loose_muon_isoCut     =  lambda mu: ( (mu.pt() < 25  and mu.absIso03 < 15 ) or (mu.pt()>=25 and mu.relIso03 < 0.6 ) )
+  #lepAna.loose_muon_isoCut     =  lambda mu: ( True )
   #lepAna.loose_electron_isoCut =  None # 
-  lepAna.loose_electron_relIso = lambda el: (  (el.pt() < 25  and el.absIso03 < 15 ) or (el.pt()>=25 and el.relIso03 < 0.6 )  )
+  lepAna.loose_electron_isoCut = lambda el: (  (el.pt() < 25  and el.absIso03 < 15 ) or (el.pt()>=25 and el.relIso03 < 0.6 )  )
 
 
 # --- LEPTON SKIMMING ---
@@ -335,23 +337,30 @@ treeProducer = cfg.Analyzer(
      collections = susySingleLepton_collections,
 )
 
+
+#if os.environ.has_key("FASTSIM"):
+#  isFastSim = os.environ["FASTSIM"].lower() == "true"
+#else:
+#  isFastSim = False
+#
+#extraSeq= [hbheFilterAna] if not isFastSim else[]
+
+
 #!# #-------- SAMPLES AND SEQUENCE -----------
 
 selectedComponents = [
         ]
 
 sequence = cfg.Sequence(
-  susyCoreSequence+
+  susyCoreSequence+ 
+    #extraSeq +
       [
-        #FASTSIM: hbeheFilterAna has to be truned off for FastSim 
-        #hbheFilterAna,
         LHEAna,
         ttHEventAna,
         treeProducer,
         ])
 
 
-import os
 if os.environ.has_key("ISDATA"):
   isData = os.environ["ISDATA"].lower() == "true"
 else:
@@ -366,7 +375,7 @@ if getHeppyOption("loadSamples"):
   if not isData:
     from CMGTools.RootTools.samples.samples_13TeV_RunIISpring15MiniAODv2 import *
 
-    #from CMGTools.RootTools.samples.samples_13TeV_74X_susyT2DegStopPriv import *
+    from CMGTools.RootTools.samples.samples_13TeV_74X_susyT2DegStopPriv import *
     from CMGTools.RootTools.samples.samples_13TeV_signals import *
 
   if not isData and bx=='50ns':
@@ -375,10 +384,10 @@ if getHeppyOption("loadSamples"):
       comp.files=comp.files[:1]
       comp.splitFactor = 1 
   if not isData and bx=='25ns':
-    selectedComponents = [QCD_HT200to300]
+    #selectedComponents = [QCD_HT200to300]
     #selectedComponents = [ SMS_T2_4bd_mStop_400_mLSP_320to390,  SMS_T2_4bd_mStop_550to600_mLSP_470to590 ] 
     #selectedComponents = SignalT2DegFullScan 
-    #selectedComponents = [T2DegStop_300_270]
+    selectedComponents = [TTJets]
     #selectedComponents = [T2tt_300_270_FastSim]
     #selectedComponents = [T2DegStop_300_270_FastSim, T2DegStop_300_240_FastSim,T2DegStop_300_290_FastSim]
     for comp in selectedComponents:
