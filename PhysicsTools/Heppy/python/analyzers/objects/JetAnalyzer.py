@@ -181,7 +181,7 @@ class JetAnalyzer( Analyzer ):
 #                self.matchJets(event, allJets)
                 self.matchJets(event, [ j for j in allJets if j.pt()>self.cfg_ana.jetPt ]) # To match only jets above chosen threshold
             if getattr(self.cfg_ana, 'smearJets', False):
-                self.smearJets(event, allJets)
+                self.smearJets(event, [ j for j in allJets if j.pt()>self.cfg_ana.jetPt ])
 
 
                 
