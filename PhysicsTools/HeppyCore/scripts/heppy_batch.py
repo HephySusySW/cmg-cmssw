@@ -161,19 +161,30 @@ if [ $looperExitStatus -ne 0 ]; then
    exit 1 
 else
    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/dcap/ # Fabio's workaround to fix gfal-tools
-   nEvents=`grep 'All Events' Loop/skimAnalyzerCount/SkimReport.txt | sed 's/.* All Events  *\([0-9][0-9]*\).*/\\1/'`
+   #nEvents=`grep 'All Events' Loop/skimAnalyzerCount/SkimReport.txt | sed 's/.* All Events  *\([0-9][0-9]*\).*/\\1/'`
    echo "Processed ${{nEvents}} according to Loop/log.txt"
    for f in Loop/tree*/*.root
    do
-      ff=`basename $f | cut -d . -f 1`
+      #ff=`basename $f | cut -d . -f 1`
+      #ff=`basename $f | cut -d . -f 2`
+      ff=`echo $f | cut -d/ -f2`
+      ff="${{ff}}_`basename $f | cut -d . -f 1`"
       d=`echo $f | cut -d / -f 2`
+      echo "-------------------"
+      echo $f
+      echo $ff
+      echo d: $d
+      echo "-------------------"
       #gfal-mkdir {srm}
-      echo "Trying 10x: lcg-cp -v file://`pwd`/Loop/$d/$ff.root {srm}/${{ff}}_Chunk{idx}_nEvents${{nEvents}}.root"
+      #echo "Trying 10x: lcg-cp -v file://`pwd`/Loop/$d/$ff.root {srm}/${{ff}}_Chunk_{idx}_nEvents${{nEvents}}.root"
+      echo "Trying 10x: lcg-cp -v file://`pwd`/Loop/$d/$ff.root {srm}/${{ff}}_Chunk_{idx}.root"
       icnt=0
       fileCopyExitStatus=1
       while [ $icnt -lt 10 ]
       do
-        lcg-cp -v file://`pwd`/Loop/$d/$ff.root {srm}/${{ff}}_Chunk{idx}_nEvents${{nEvents}}.root
+        #lcg-cp -v file://`pwd`/Loop/$d/$ff.root {srm}/${{ff}}_Chunk_{idx}_nEvents${{nEvents}}.root
+        echo `ls file://`pwd`/Loop/$d`
+        lcg-cp -v file://`pwd`/Loop/$d/$ff.root {srm}/${{ff}}_Chunk_{idx}.root
         if [ $? -eq 0 ]
         then
           fileCopyExitStatus=0
@@ -196,10 +207,10 @@ echo 'sending the job directory back'
 cp -r Loop/* $LS_SUBCWD 
 exit $copyExitStat
 """.format(
-          idx = jobDir[jobDir.find("_Chunk")+6:].strip("/") if '_Chunk' in jobDir else 'all',
-          #srm = (""+remoteDir+jobDir[ jobDir.rfind("/") : (jobDir.find("_Chunk") if '_Chunk' in jobDir else len(jobDir)) ]).replace("root://eoscms.cern.ch/","")
-          #idx=index, 
-         srm='srm://hephyse.oeaw.ac.at'+remoteDir+jobDir[jobDir.rfind("/"):max(0,jobDir.find("_Chunk"))]
+          #idx = jobDir[jobDir.find("_Chunk")+6:].strip("/") if '_Chunk' in jobDir else 'all',
+          #srm='srm://hephyse.oeaw.ac.at'+remoteDir+jobDir[jobDir.rfind("/"):max(0,jobDir.find("_Chunk"))]
+          idx = jobDir[jobDir.find("_Chunk_")+6:].strip("/") if '_Chunk_' in jobDir else 'all',
+          srm='srm://hephyse.oeaw.ac.at'+remoteDir+jobDir[jobDir.rfind("/"):max(0,jobDir.find("_Chunk_"))]
           )
 
    else :
