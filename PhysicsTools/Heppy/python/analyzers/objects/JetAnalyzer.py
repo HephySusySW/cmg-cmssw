@@ -178,8 +178,8 @@ class JetAnalyzer( Analyzer ):
             if self.cfg_ana.do_mc_match:
                 for igj, gj in enumerate(self.genJets):
                     gj.index = igj
-#                self.matchJets(event, allJets)
-                self.matchJets(event, [ j for j in allJets if j.pt()>self.cfg_ana.jetPt ]) # To match only jets above chosen threshold
+                self.matchJets(event, allJets)   ### should switch to the line below, also for smearjets
+                #self.matchJets(event, [ j for j in allJets if j.pt()>self.cfg_ana.jetPt ]) # To match only jets above chosen threshold
             if getattr(self.cfg_ana, 'smearJets', False):
                 self.smearJets(event, [ j for j in allJets if j.pt()>self.cfg_ana.jetPt ])
 
