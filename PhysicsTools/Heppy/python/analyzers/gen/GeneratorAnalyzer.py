@@ -52,19 +52,25 @@ class GeneratorAnalyzer( Analyzer ):
         self.stableBSMParticleIds  = set(cfg_ana.stableBSMParticleIds) # neutralinos and such
         self.savePreFSRParticleIds = set(cfg_ana.savePreFSRParticleIds)
         self.makeAllGenParticles   = cfg_ana.makeAllGenParticles
+        self.makePackedGenParticles= getattr( cfg_ana , "makePackedGenParticles", False)
         self.makeSplittedGenLists  = cfg_ana.makeSplittedGenLists
         self.allGenTaus            = cfg_ana.allGenTaus if self.makeSplittedGenLists else False
  
     def declareHandles(self):
         super(GeneratorAnalyzer, self).declareHandles()
         self.mchandles['genParticles'] = AutoHandle( 'prunedGenParticles', 'std::vector<reco::GenParticle>' )
-                
+        if self.makePackedGenParticles:
+            self.mchandles['packedPFCands']  = AutoHandle( "packedPFCandidates", 'vector<pat::PackedCandidate>' )
+            self.mchandles['packedGenParts'] = AutoHandle( "packedGenParticles", 'std::vector<pat::PackedGenParticle>' )
     def beginLoop(self,setup):
         super(GeneratorAnalyzer,self).beginLoop(setup)
 
     def makeMCInfo(self, event):
         verbose = getattr(self.cfg_ana, 'verbose', False)
         rawGenParticles = self.mchandles['genParticles'].product() 
+        if self.makePackedGenParticles:
+            packedGenParts = self.mchandles['packedGenParts'].product()
+            packedPFCands  = self.mchandles['packedPFCands'].product()
         good = []; keymap = {};
         allGenParticles = []
         for rawIndex,p in enumerate(rawGenParticles):
@@ -176,6 +182,9 @@ class GeneratorAnalyzer( Analyzer ):
 
         if self.makeAllGenParticles:
             event.genParticles = allGenParticles
+        if self.makePackedGenParticles:
+            event.packedGenParticles = packedGenParts 
+            event.packedPFCandidates = packedPFCands 
 
         if self.makeSplittedGenLists:
             event.genHiggsBosons = []
