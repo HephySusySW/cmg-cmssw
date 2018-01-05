@@ -73,7 +73,12 @@ class GeneratorAnalyzer( Analyzer ):
             packedPFCands  = self.mchandles['packedPFCands'].product()
         good = []; keymap = {};
         allGenParticles = []
+        #print "GENINFO: rawIndex, pdgId, status, pt, eta, phi, nMothers, nDaughters, motherPdgId, motherKey, daugherPdgId[daughterStatus]"
         for rawIndex,p in enumerate(rawGenParticles):
+            #print " particle: %6d  : %+8d  %3d :  %8.2f   %+5.2f   %+5.2f : %d %d : %+8d {%6d}: %s" % ( rawIndex,
+            #        p.pdgId(), p.status(), p.pt(), p.eta(), p.phi(), p.numberOfMothers(), p.numberOfDaughters(), 
+            #        p.motherRef(0).pdgId() if p.numberOfMothers() > 0 else -999, p.motherRef(0).key()   if p.numberOfMothers() > 0 else -999, 
+            #        "  ".join("%d[%d]" % (p.daughter(i).pdgId(), p.daughter(i).status()) for i in xrange(p.numberOfDaughters())))
             if self.makeAllGenParticles: allGenParticles.append(p)
             id     = abs(p.pdgId())
             status = p.status()
@@ -137,6 +142,13 @@ class GeneratorAnalyzer( Analyzer ):
                 gp.rawIndex = rawIndex # remember its index, so that we can set the mother index later
                 keymap[rawIndex] = len(good)
                 good.append(gp)
+            #print " --- "
+            #print " particle PASSED!"
+            #print " particle : %6d  : %+8d  %3d :  %8.2f   %+5.2f   %+5.2f : %d %d : %+8d {%6d}: %s" % ( rawIndex,
+            #        p.pdgId(), p.status(), p.pt(), p.eta(), p.phi(), p.numberOfMothers(), p.numberOfDaughters(), 
+            #        p.motherRef(0).pdgId() if p.numberOfMothers() > 0 else -999, p.motherRef(0).key()   if p.numberOfMothers() > 0 else -999, 
+            #        "  ".join("%d[%d]" % (p.daughter(i).pdgId(), p.daughter(i).status()) for i in xrange(p.numberOfDaughters())))
+            #print " --- "
         # connect mother links
         for igp,gp in enumerate(good):
             gp.motherIndex = -1

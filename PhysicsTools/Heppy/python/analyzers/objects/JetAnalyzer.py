@@ -178,8 +178,10 @@ class JetAnalyzer( Analyzer ):
             if self.cfg_ana.do_mc_match:
                 for igj, gj in enumerate(self.genJets):
                     gj.index = igj
-                self.matchJets(event, allJets)   ### should switch to the line below, also for smearjets
-                #self.matchJets(event, [ j for j in allJets if j.pt()>self.cfg_ana.jetPt ]) # To match only jets above chosen threshold
+
+                self.matchJets(event, [ j for j in self.genJets if j.pt()>self.cfg_ana.jetPt ], matchToGenJets = False) # match GenJets first (which should not be matched to themselves) #NOTE: one should be careful, as matchObjectCollection2 in matchJets adds a 'matched' attribute 
+                #self.matchJets(event, allJets)   ### should switch to the line below, also for smearjets
+                self.matchJets(event, [ j for j in allJets if j.pt()>self.cfg_ana.jetPt ]) # To match only jets above chosen threshold
             if getattr(self.cfg_ana, 'smearJets', False):
                 self.smearJets(event, [ j for j in allJets if j.pt()>self.cfg_ana.jetPt ])
 
@@ -444,7 +446,7 @@ class JetAnalyzer( Analyzer ):
 
         self.heaviestQCDFlavour = 5 if len(self.bqObjects) else (4 if len(self.cqObjects) else 1);
  
-    def matchJets(self, event, jets):
+    def matchJets(self, event, jets, matchToGenJets = True):
         match = matchObjectCollection2(jets,
                                        event.genbquarks + event.genwzquarks,
                                        deltaRMax = 0.3)
@@ -454,11 +456,12 @@ class JetAnalyzer( Analyzer ):
             jet.mcMatchId   = (gen.sourceId     if gen != None else 0)
             jet.mcMatchFlav = (abs(gen.pdgId()) if gen != None else 0)
 
-        match = matchObjectCollection2(jets,
-                                       self.genJets,
-                                       deltaRMax = 0.3)
-        for jet in jets:
-            jet.mcJet = match[jet]
+        if matchToGenJets:
+            match = matchObjectCollection2(jets,
+                                           self.genJets,
+                                           deltaRMax = 0.3)
+            for jet in jets:
+                jet.mcJet = match[jet]
 
 
  
