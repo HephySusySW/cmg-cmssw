@@ -28,18 +28,18 @@ class LHEWeightAnalyzer( Analyzer ):
                                                   mayFail=True,
                                                   fallbackLabel='source',
                                                   lazy=False )
-        if self.cfg_ana.useLumiInfo:
+        if self.cfg_ana.useLumiInfo or self.cfg_ana.usePSweights:
             self.mchandles['GenInfos'] = AutoHandle('generator',
                                                     'GenEventInfoProduct',
                                                     mayFail=True,
                                                     fallbackLabel='source',
                                                     lazy=False )
             self.genLumiHandle = Handle("GenLumiInfoHeader")
-
+        
     def beginLoop(self, setup):
         super(LHEWeightAnalyzer,self).beginLoop(setup)
         
-        if self.cfg_ana.useLumiInfo:
+        if self.cfg_ana.useLumiInfo or self.cfg_ana.usePSweights:
             lumis = Lumis(self.cfg_comp.files)
             for lumi in lumis:
                 if lumi.getByLabel('generator',self.genLumiHandle):
@@ -87,6 +87,19 @@ class LHEWeightAnalyzer( Analyzer ):
                 weight.wgt=w
                 idstr=self.LHEWeightsNames[cnt+1].split(',')[1]
                 weight.id=str(10000 + int(idstr[6:]) )
+                event.LHE_weights.append(weight)
+        
+        if self.cfg_ana.usePSweights and self.mchandles['GenInfos'].isValid():
+            for cnt,w in enumerate(self.mchandles['GenInfos'].product().weights()[:14]):
+                weight= WeightsInfo()
+                weight.wgt=w
+                # appending the PS weights to the LHE weights vector.
+                # 0,1 correspond to central ME weight value and replica
+                # The remaining 12 values (weightIDs = 2 to 13) correspond to the PS weights in the following order (ISR up, FSR up, ISR down, FSR down) x 3 sets
+                # 2 = isrRedHi isr:muRfac=0.707, 3 = fsrRedHi fsr:muRfac=0.707, 4 = isrRedLo isr:muRfac=1.414, 5 = fsrRedLo fsr:muRfac=1.414
+                # 6 = isrDefHi isr:muRfac=0.5, 7 = fsrDefHi fsr:muRfac=0.5,  8 = isrDefLo isr:muRfac=2.0,   9 = fsrDefLo fsr:muRfac=2.0
+                # 10 = isrConHi isr:muRfac=0.25, 11 = fsrConHi fsr:muRfac=0.25, 12 = isrConLo isr:muRfac=4.0, 13 = fsrConLo fsr:muRfac=4.0
+                weight.id=str(20000 + cnt )
                 event.LHE_weights.append(weight)
                 
         return True
