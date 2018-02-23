@@ -107,5 +107,6 @@ class LHEWeightAnalyzer( Analyzer ):
 setattr(LHEWeightAnalyzer,"defaultConfig",
     cfg.Analyzer(LHEWeightAnalyzer,
                  useLumiInfo = False,
+                 usePSweights = False
     )
 )
