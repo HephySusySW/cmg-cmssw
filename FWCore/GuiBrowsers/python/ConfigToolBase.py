@@ -38,15 +38,21 @@ class ConfigToolBase(object) :
     _defaultValue="No default value. Set parameter value."
     _path = ""
     def __init__(self):
+        import os
         self._parameters=dicttypes.SortedKeysDict()
         self._description=self.__doc__
         self._comment = ''
         self.parAccepted=True
         saveOrigin(self,1)
         self._path = path.realpath(self._filename)        
-        self._path = self._path.split("/src/")
-        self._path = self._path[1].replace("/python","")
-        #self._path = "".join(self._path)
+        #self._path = self._path.split("/src/")
+        #self._path = self._path[1].replace("/python","")
+        ##self._path = "".join(self._path)
+        #self._path = self._path.replace("/",".")
+        #self._path = self._path.replace(".py","")
+        self._path = self._path.lstrip( os.environ['CMSSW_BASE'] )
+        self._path = self._path.replace("/python","")
+        self._path = self._path.lstrip('/')
         self._path = self._path.replace("/",".")
         self._path = self._path.replace(".py","")
 
