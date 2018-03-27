@@ -77,7 +77,12 @@ class LHEWeightAnalyzer( Analyzer ):
                         newid = str(10000 + int(w.id.rsplit('_',1)[1]))
                         newweight.id = newid
 
-                    else: raise RuntimeError('Unknown string id in LHE weights')
+                    elif w.id.startswith('rwgt'):
+                        newid = str(20000 + int(w.id.rsplit('_',1)[1])) 
+                        newweight.id = newid
+                    else:
+                        #print w.id, newweight.wgt
+                        raise RuntimeError('Unknown string id in LHE weights: %r' % w.id)
                     event.LHE_weights.append(newweight)
 
 

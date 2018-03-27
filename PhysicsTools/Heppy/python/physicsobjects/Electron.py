@@ -56,7 +56,7 @@ class Electron( Lepton ):
         for ID in self.electronIDs():
             if ID.first == id:
                 return ID.second
-        raise RuntimeError("Electron id '%s' not yet implemented in Electron.py" % id)
+        raise RuntimeError("Electron id '%s' not yet implemented in Electron.py. Available POG Ids: %s" % (id, ', '.join([ID.first for ID in self.electronIDs()])))
 
     def cutBasedId(self, wp, showerShapes="auto"):
         if "_zs" in wp:
