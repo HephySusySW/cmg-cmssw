@@ -109,7 +109,7 @@ class LeptonAnalyzer( Analyzer ):
         self.doMatchToPhotons = getattr(cfg_ana, 'do_mc_match_photons', False)
         self.doDirectionalIsolation = getattr(cfg_ana, 'doDirectionalIsolation', []) if self.doMiniIsolation == True else []
         self.doFixedConeIsoWithMiniIsoVeto = getattr(cfg_ana, 'doFixedConeIsoWithMiniIsoVeto', False)
-
+        self.pfCandAssocDR = getattr(cfg_ana, "pfCandAssocDR", 0.)
     #----------------------------------------
     # DECLARATION OF HANDLES OF LEPTONS STUFF   
     #----------------------------------------
@@ -128,7 +128,7 @@ class LeptonAnalyzer( Analyzer ):
         self.handles['rhoEle'] = AutoHandle( self.cfg_ana.rhoElectron, 'double')
         self.handles['rhoEleHLT'] = AutoHandle( 'fixedGridRhoFastjetCentralCalo', 'double')
 
-        if self.IsolationComputer:
+        if self.IsolationComputer or self.pfCandAssocDR>0.:
             self.handles['packedCandidates'] = AutoHandle( self.cfg_ana.packedCandidates, 'std::vector<pat::PackedCandidate>')
 
         if self.doMatchToPhotons:
@@ -247,7 +247,11 @@ class LeptonAnalyzer( Analyzer ):
         for lepton in event.selectedLeptons:
             if hasattr(self,'efficiency'):
                 self.efficiency.attachToObject(lepton)
-
+        # Associate close by pf candidates
+        if self.pfCandAssocDR>0.:
+            for lepton in event.selectedLeptons + event.otherLeptons:
+                lepton.pfCands = filter( lambda p: deltaR(p.eta(),p.phi(),lepton.eta(),lepton.phi())<self.pfCandAssocDR, self.handles['packedCandidates'].product() ) 
+ 
     def makeAllMuons(self, event):
         """
                make a list of all muons, and apply basic corrections to them
@@ -807,5 +811,6 @@ setattr(LeptonAnalyzer,"defaultConfig",cfg.Analyzer(
     do_mc_match = True, # note: it will in any case try it only on MC, not on data
     do_mc_match_photons = False, # mc match electrons to photons 
     match_inclusiveLeptons = False, # match to all inclusive leptons
+    pfCandAssocDR = 0., #DR below which pf cands are associated to the lepton 
     )
 )
