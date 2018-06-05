@@ -27,7 +27,7 @@ class TriggerMatchAnalyzer( Analyzer ):
         super(TriggerMatchAnalyzer, self).declareHandles()
         self.handles['TriggerBits'] = AutoHandle( ('TriggerResults','','HLT'), 'edm::TriggerResults' )
         fallback = ( self.fallbackCollection if self.fallbackCollection else 'slimmedPatTrigger', '', self.fallbackName if self.fallbackName else None )
-        self.handles['TriggerObjects'] = AutoHandle( ('slimmedPatTrigger','',self.processName), 'std::vector<pat::TriggerObjectStandAlone>', fallbackLabel=fallback )
+        self.handles['TriggerObjects'] = AutoHandle( ('selectedPatTrigger','',self.processName), 'std::vector<pat::TriggerObjectStandAlone>', fallbackLabel=fallback )
 
     def beginLoop(self, setup):
         super(TriggerMatchAnalyzer,self).beginLoop(setup)
