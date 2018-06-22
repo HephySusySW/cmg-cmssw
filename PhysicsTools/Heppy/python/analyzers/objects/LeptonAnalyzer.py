@@ -256,6 +256,10 @@ class LeptonAnalyzer( Analyzer ):
                 lepton.pfCands_photon  = filter( lambda p: abs(p.pdgId()) == 22, all_pfCands)
                 lepton.pfCands_electron= filter( lambda p: abs(p.pdgId()) == 11, all_pfCands)
                 lepton.pfCands_muon    = filter( lambda p: abs(p.pdgId()) == 13, all_pfCands)
+                if hasattr(event, "ivf"): 
+                    lepton.ivf = filter( lambda v:deltaR(v.eta(), v.phi(), lepton.eta(), lepton.phi()) < 0.6,  event.ivf )
+                    for ivf in lepton.ivf:
+                        ivf.deltaR = deltaR(ivf.eta(), ivf.phi(), lepton.eta(), lepton.phi())
  
     def makeAllMuons(self, event):
         """
