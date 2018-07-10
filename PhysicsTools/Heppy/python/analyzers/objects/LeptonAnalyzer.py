@@ -250,7 +250,16 @@ class LeptonAnalyzer( Analyzer ):
         # Associate close by pf candidates
         if self.pfCandAssocDR>0.:
             for lepton in event.selectedLeptons + event.otherLeptons:
-                lepton.pfCands = filter( lambda p: deltaR(p.eta(),p.phi(),lepton.eta(),lepton.phi())<self.pfCandAssocDR, self.handles['packedCandidates'].product() ) 
+                all_pfCands            = filter( lambda p: deltaR(p.eta(),p.phi(),lepton.eta(),lepton.phi())<self.pfCandAssocDR, self.handles['packedCandidates'].product() )
+                lepton.pfCands_neutral = filter( lambda p: abs(p.pdgId()) == 130, all_pfCands)
+                lepton.pfCands_charged = filter( lambda p: abs(p.pdgId()) == 211, all_pfCands)
+                lepton.pfCands_photon  = filter( lambda p: abs(p.pdgId()) == 22, all_pfCands)
+                lepton.pfCands_electron= filter( lambda p: abs(p.pdgId()) == 11, all_pfCands)
+                lepton.pfCands_muon    = filter( lambda p: abs(p.pdgId()) == 13, all_pfCands)
+                if hasattr(event, "ivf"): 
+                    lepton.ivf = filter( lambda v:deltaR(v.eta(), v.phi(), lepton.eta(), lepton.phi()) < 0.6,  event.ivf )
+                    for ivf in lepton.ivf:
+                        ivf.deltaR = deltaR(ivf.eta(), ivf.phi(), lepton.eta(), lepton.phi())
  
     def makeAllMuons(self, event):
         """
