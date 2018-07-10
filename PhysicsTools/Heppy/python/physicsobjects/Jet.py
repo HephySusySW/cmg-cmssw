@@ -119,7 +119,13 @@ class Jet(PhysicsObject):
             if   self.jetID("PAG_monoID_Loose") and self.jetID("POG_PFID_Tight") : return 4;
             if   self.jetID("POG_PFID_Tight")  : return 3;
             #elif self.jetID("POG_PFID_Medium") : return 2;  commented this line because this working point doesn't exist anymore (as 12/05/15)
-            # elif self.jetID("POG_PFID_Loose")  : return 1;
+            #elif self.jetID("POG_PFID_Loose")  : return 1; # always use 2016 loose, there's no 2017 loose jet id
+            else                               : return 0;
+        elif name == "POG_PFID16":
+            if   self.jetID("PAG_monoID_Tight") and self.jetID("POG_PFID_Tight2016") : return 5;
+            if   self.jetID("PAG_monoID_Loose") and self.jetID("POG_PFID_Tight2016") : return 4;
+            if   self.jetID("POG_PFID_Tight2016")  : return 3;
+            elif self.jetID("POG_PFID_Loose2016")  : return 1; # always use 2016 loose, there's no 2017 loose jet id
             else                               : return 0;
         
         # jetID from here: https://twiki.cern.ch/twiki/bin/viewauth/CMS/JetID#Recommendations_for_13_TeV_data
