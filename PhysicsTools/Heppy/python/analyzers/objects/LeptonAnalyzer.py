@@ -19,6 +19,11 @@ from ROOT import heppy, TLorentzVector
 import math
 cmgMuonCleanerBySegments = heppy.CMGMuonCleanerBySegmentsAlgo()
 
+def ptRel(p4,axis):
+    a = ROOT.TVector3(axis.Vect().X(),axis.Vect().Y(),axis.Vect().Z())
+    o = ROOT.TLorentzVector(p4.Px(),p4.Py(),p4.Pz(),p4.E())
+    return o.Perp(a)
+
 class LeptonAnalyzer( Analyzer ):
 
     
@@ -251,11 +256,14 @@ class LeptonAnalyzer( Analyzer ):
         if self.pfCandAssocDR>0.:
             for lepton in event.selectedLeptons + event.otherLeptons:
                 all_pfCands            = filter( lambda p: deltaR(p.eta(),p.phi(),lepton.eta(),lepton.phi())<self.pfCandAssocDR, self.handles['packedCandidates'].product() )
+                for cand in all_pfCands:
+                    cand.ptRel  = ptRel( cand.p4(), lepton.p4() )
+                    cand.deltaR = deltaR( cand.eta(), cand.phi(), lepton.eta(), lepton.phi() )
                 lepton.pfCands_neutral = filter( lambda p: abs(p.pdgId()) == 130, all_pfCands)
                 lepton.pfCands_charged = filter( lambda p: abs(p.pdgId()) == 211, all_pfCands)
                 lepton.pfCands_photon  = filter( lambda p: abs(p.pdgId()) == 22, all_pfCands)
-                lepton.pfCands_electron= filter( lambda p: abs(p.pdgId()) == 11, all_pfCands)
-                lepton.pfCands_muon    = filter( lambda p: abs(p.pdgId()) == 13, all_pfCands)
+                lepton.pfCands_electron= filter( lambda p: abs(p.pdgId()) == 11 and (p.deltaR>3*10**-4 or p.pdgId()!=lepton.pdgId()), all_pfCands)
+                lepton.pfCands_muon    = filter( lambda p: abs(p.pdgId()) == 13 and (p.deltaR>3*10**-4 or p.pdgId()!=lepton.pdgId()), all_pfCands)
                 if hasattr(event, "ivf"): 
                     lepton.ivf = filter( lambda v:deltaR(v.eta(), v.phi(), lepton.eta(), lepton.phi()) < 0.6,  event.ivf )
                     for ivf in lepton.ivf:
