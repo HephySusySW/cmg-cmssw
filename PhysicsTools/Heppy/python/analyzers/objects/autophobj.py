@@ -40,9 +40,9 @@ weightsInfoType = NTupleObjectType("WeightsInfo", mcOnly=True, variables = [
     NTupleVariable("wgt",   lambda x : x.wgt),
 ])
 
-##------------------------------------------  
+##-----------------------------------------  
 ## LEPTON
-##------------------------------------------  
+##-----------------------------------------  
 
 ### BASIC VERSION WITH ONLY MAIN LEPTON ID CRITERIA
 leptonType = NTupleObjectType("lepton", baseObjectTypes = [ particleType ], variables = [
